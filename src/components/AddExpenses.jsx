@@ -5,6 +5,8 @@ const AddExpenses = () => {
     const [expenses, setExpenses] = useState({description: '', amount: "", date: new Date(), category: 'daily needs'})
     const supabase = createClient('https://eoqgkceqdsvmauukcvmh.supabase.co', 
         'sb_publishable_2ELdfYr9xZC0rHgtyQK1Ow_MTnpbSZD')
+    const [showModal, setShowModal] = useState(false)
+    const [modalMessage, setModalMessage] = useState('')
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -13,14 +15,32 @@ const AddExpenses = () => {
         
         if(error) {
             console.error('Error inserting data:', error)
+            setModalMessage('Error Adding')
+            setShowModal(true)
+            setTimeout(() => {
+                setShowModal(false)
+            }, 1000)
             return
         }
+
+        setShowModal(true)
+        setModalMessage('Expense Added')
+        setTimeout(() => {
+            setShowModal(false)
+        }, 1000)
+
+        setExpenses({description: '', amount: "", date: new Date(), category: 'daily needs'})
     }
 
     const category = ['Daily Needs', 'Food', 'Transport', 'Bills', 'Health', 'Education', 'Entertainment', 'Others']
     
     return (
         <form className="expense-form" onSubmit={handleSubmit}>
+            <div className="modal-container" style={{display: showModal ? 'flex' : 'none'}}>
+                <div className="modal-content">
+                    <h2>{modalMessage}</h2>
+                </div>
+            </div>
             <label htmlFor="description">Description:</label>
             <input 
                 type="text" 
