@@ -1,10 +1,8 @@
 import { useState } from 'react'
-import { createClient } from '@supabase/supabase-js'
+import { supabase } from './supabase-client'
 
 const AddExpenses = () => {
     const [expenses, setExpenses] = useState({description: '', amount: "", date: new Date(), category: 'daily needs'})
-    const supabase = createClient('https://eoqgkceqdsvmauukcvmh.supabase.co', 
-        'sb_publishable_2ELdfYr9xZC0rHgtyQK1Ow_MTnpbSZD')
     const [showModal, setShowModal] = useState(false)
     const [modalMessage, setModalMessage] = useState('')
 

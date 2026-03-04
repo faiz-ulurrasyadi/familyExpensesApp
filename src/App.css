@@ -109,3 +109,57 @@ button{
 button:hover{
   background-color: rgb(0, 162, 255);
 }
+
+.history-container{
+    width: 100%;
+    background-color: aliceblue;
+    padding: 0px;
+}
+.history-list{
+    margin: 0px;
+    padding-left: 10px;
+}
+.history-list{
+    font-size: 14px;
+}
+.history-header{
+    display: grid;
+    grid-template-columns: 1fr 5fr 4fr 3fr;
+    text-align:center;
+    font-weight: bold;
+}
+.history-item{
+    display: grid;
+    grid-template-columns: 1fr 5fr 4fr 3fr;
+}
+.action-btns{
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+.action-btns button{
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    font-size: 12px;
+}
+
+.edit-form{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 10px;
+}
+.edit-form .update-btn{
+    width: 100px;
+    height: 30px;
+    font-size: 14px;
+}
+.detail-modal{
+    border: 1px solid black;
+    border-radius: 5px;;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+.detail-modal p{
+    margin: 2px 2px;
+}
