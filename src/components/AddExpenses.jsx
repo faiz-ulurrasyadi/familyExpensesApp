@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { supabase } from './supabase-client'
 
 const AddExpenses = () => {
-    const [expenses, setExpenses] = useState({description: '', amount: "", date: new Date(), category: 'daily needs'})
+    const [expenses, setExpenses] = useState({description: '', amount: "", date: new Date(), category: 'Daily Needs'})
     const [showModal, setShowModal] = useState(false)
     const [modalMessage, setModalMessage] = useState('')
 
@@ -27,7 +27,7 @@ const AddExpenses = () => {
             setShowModal(false)
         }, 1000)
 
-        setExpenses({description: '', amount: "", date: new Date(), category: 'daily needs'})
+        setExpenses({description: '', amount: "", date: new Date(), category: 'Daily Needs'})
     }
 
     const category = ['Daily Needs', 'Food', 'Transport', 'Bills', 'Health', 'Education', 'Entertainment', 'Others']

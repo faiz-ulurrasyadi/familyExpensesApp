@@ -6,7 +6,7 @@
 
 body{
   margin: 20px auto;
-  width: 360px;
+  width: 380px;
   font-family: 'Poppins', sans-serif;
 }
 
@@ -30,6 +30,9 @@ h1{
   gap: 5px;
   background-color: aliceblue;
   padding: 20px;
+  border-left:1px solid rgba(0, 102, 255, 0.863);
+  border-bottom:1px solid rgba(0, 102, 255, 0.863);
+  border-right:1px solid rgba(0, 102, 255, 0.863);
 }
 
 .modal-container{
@@ -71,7 +74,7 @@ nav{
   gap: 5px;
 }
 nav .nav-link{
-    background-color:aliceblue;
+    background-color:rgba(90, 149, 238, 0.993);
     width: 33%;
     height: 40px;
     display: flex;
@@ -79,18 +82,24 @@ nav .nav-link{
     align-items: center;
     text-decoration: none;
     font-weight: bold;
-    color: black;
-    border-radius: 5px;
+    color: white;
+    border-radius: 5px 5px 0px 0px;
     font-size: 14px;
 }
 nav .nav-link:hover{
-    color: white;
-    background-color: rgb(0, 102, 255, 0.8);
+    color: rgba(90, 149, 238, 0.993);
+    background-color: aliceblue;
+    border-left:1px solid rgba(0, 102, 255, 0.863);
+    border-top:1px solid rgba(0, 102, 255, 0.863);
+    border-right:1px solid rgba(0, 102, 255, 0.863);
 }
 
 .nav-link.active{
-    color: white;
-    background-color: rgb(0, 102, 255, 0.8);
+    color: rgba(90, 149, 238, 0.993);
+    background-color: aliceblue;
+    border-left:1px solid rgba(0, 102, 255, 0.863);
+    border-top:1px solid rgba(0, 102, 255, 0.863);
+    border-right:1px solid rgba(0, 102, 255, 0.863);
 }
 
 button{
@@ -114,6 +123,9 @@ button:hover{
     width: 100%;
     background-color: aliceblue;
     padding: 0px;
+    border-left:1px solid rgba(0, 102, 255, 0.863);
+    border-bottom:1px solid rgba(0, 102, 255, 0.863);
+    border-right:1px solid rgba(0, 102, 255, 0.863);
 }
 .history-list{
     margin: 0px;
@@ -131,11 +143,12 @@ button:hover{
 .history-item{
     display: grid;
     grid-template-columns: 1fr 5fr 4fr 3fr;
+    padding-right: 10px;
 }
 .action-btns{
     display: flex;
     justify-content: center;
-    gap: 5px;
+    gap: 3px;
 }
 .action-btns button{
     width: 25px;
@@ -162,4 +175,13 @@ button:hover{
 }
 .detail-modal p{
     margin: 2px 2px;
+}
+
+.summary-container{
+    background-color: aliceblue;
+    padding: 10px;
+}
+.reset-btn{
+    margin: 10px auto;
+    width: 250px;
 }
