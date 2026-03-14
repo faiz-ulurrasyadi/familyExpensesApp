@@ -1,10 +1,11 @@
 import { supabase } from "./supabase-client"
 import { useState, useEffect, use } from "react"
+import CurrencyInput from "react-currency-input-field"
 
 const History = () => {
     const [expenses, setExpenses] = useState([])
     const [newDescription, setNewDescription] = useState('')
-    const [newAmount, setNewAmount] = useState('')
+    const [newAmount, setNewAmount] = useState(0)
     const [newDate, setNewDate] = useState(new Date())
     const [newCategory, setNewCategory] = useState('daily needs')
     const [editingId, setEditingId] = useState(null)
@@ -60,7 +61,7 @@ const History = () => {
                 {expenses.map((expense, idx) => (
                     <div>
                         <div key={expense.id} className="history-item">
-                            <p style={{textAlign: "center"}}>{expense.id}</p>
+                            <p style={{textAlign: "center"}}>{idx + 1}</p>
                             <p style={{marginLeft: "12px"}}>{expense.description}</p>
                             <p style={{textAlign: "right", marginRight: "10px"}}>{showInRupiah(expense.amount)}</p>
                             <div className="action-btns">
@@ -83,7 +84,7 @@ const History = () => {
                         {detailId === expense.id && (
                             <div className="detail-modal" onClick={() => setDetailId(null)}>
                                 <p>Description: {expense.description}</p>
-                                <p>Amount: Rp. {expense.amount}</p>
+                                <p>Amount: {showInRupiah(expense.amount)}</p>
                                 <p>Date: {new Date(expense.date).toLocaleDateString()}</p>
                                 <p>Category: {expense.category}</p>
                             </div>
@@ -99,12 +100,20 @@ const History = () => {
                                         onChange={(e) => setNewDescription(e.target.value)}
                                     />
                                     <label htmlFor="edit-amount">Amount</label>
-                                    <input 
+                                    <CurrencyInput
+                                        id="edit-amount"
+                                        prefix="Rp "
+                                        decimalsLimit={0}
+                                        groupSeparator="."
+                                        decimalSeparator=","
+                                        onValueChange={(e) => setNewAmount(e)}
+                                    />
+                                    {/* <input 
                                         type="number" 
                                         id="edit-amount" 
                                         value={newAmount}
                                         onChange={(e) => setNewAmount(Number(e.target.value))}
-                                    />
+                                    /> */}
                                     <label htmlFor="edit-date">Date</label>
                                     <input 
                                         type="date" 
