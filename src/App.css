@@ -24,6 +24,15 @@ header{
 h1{
   font-size: 22px;
 }
+
+.auth-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 80%;
+    margin: 0 auto;
+}
+
 .expense-form{
   display: flex;
   flex-direction: column;
@@ -33,6 +42,7 @@ h1{
   border-left:1px solid rgba(0, 102, 255, 0.863);
   border-bottom:1px solid rgba(0, 102, 255, 0.863);
   border-right:1px solid rgba(0, 102, 255, 0.863);
+  border-radius: 0px 0px 5px 5px;
 }
 
 .modal-container{
@@ -102,7 +112,7 @@ nav .nav-link:hover{
     border-right:1px solid rgba(0, 102, 255, 0.863);
 }
 
-button{
+.add-expense-btn{
   width: 80%;
   height: 50px;
   margin: 10px auto;
@@ -126,13 +136,16 @@ button:hover{
     border-left:1px solid rgba(0, 102, 255, 0.863);
     border-bottom:1px solid rgba(0, 102, 255, 0.863);
     border-right:1px solid rgba(0, 102, 255, 0.863);
+    border-radius: 0px 0px 5px 5px;
 }
 .history-list{
     margin: 0px;
     padding-left: 10px;
-}
-.history-list{
     font-size: 14px;
+    height: 550px;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    scroll-behavior: smooth;
 }
 .history-header{
     display: grid;
@@ -146,9 +159,48 @@ button:hover{
     padding-right: 10px;
 }
 .action-btns{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr; 
+}
+.edit-btn, .delete-btn, .detail-btn{
+    background-color: rgb(0, 102, 255, 0.8);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+    text-align: center;
+}
+.delete-box{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(86, 151, 250);
+    border: 1px solid red;
+    border-radius: 5px;
+    text-align: center;
+    color: white;
+    padding: 5px;
+}
+.delete-box-btns{
     display: flex;
     justify-content: center;
-    gap: 3px;
+    gap: 10px;
+    margin-top: 10px;
+}
+.delete-box-btns .yesno{
+    width: 80px;
+    height: 30px;
+    font-size: 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: rgb(0, 102, 255, 0.8);
+    color: white;
+    margin-bottom: 10px;
+}
+.delete-box-btns .yesno:hover{
+    background-color: rgb(0, 162, 255);
 }
 .action-btns button{
     width: 25px;
@@ -180,6 +232,10 @@ button:hover{
 .summary-container{
     background-color: aliceblue;
     padding: 10px;
+    border-radius: 0px 0px 5px 5px;
+    border-left:1px solid rgba(0, 102, 255, 0.863);
+    border-bottom:1px solid rgba(0, 102, 255, 0.863);
+    border-right:1px solid rgba(0, 102, 255, 0.863);
 }
 .reset-btn{
     margin: 10px auto;

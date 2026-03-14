@@ -9,10 +9,12 @@ const History = () => {
     const [newCategory, setNewCategory] = useState('daily needs')
     const [editingId, setEditingId] = useState(null)
     const [detailId, setDetailId] = useState(null)
+    const [showDeleteBox, setShowDeleteBox] = useState(false)
+    const [deleteId, setDeleteId] = useState(null)
     const category = ['Daily Needs', 'Food', 'Transport', 'Bills', 'Health', 'Education', 'Entertainment', 'Others']
 
     const fetchTask = async () => {
-        const {error, data} = await supabase.from('familyExpensesData').select('*').order('id', {ascending: true})
+        const {error, data} = await supabase.from('familyExpensesData').select('*').order('id', {ascending: false})
         setExpenses(data)
     }
 
@@ -21,6 +23,7 @@ const History = () => {
         if (!error) {
             fetchTask()
         }
+        setDeleteId(null)
     }
 
     useEffect(() => {
@@ -40,6 +43,10 @@ const History = () => {
             setEditingId(null)
         }
     }
+    const showInRupiah = (amount) => {
+        return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' , minimumFractionDigits: 0,
+    maximumFractionDigits: 0,}).format(amount)
+    }
 
     return (
         <div className="history-container">
@@ -53,9 +60,9 @@ const History = () => {
                 {expenses.map((expense, idx) => (
                     <div>
                         <div key={expense.id} className="history-item">
-                            <p style={{textAlign: "center"}}>{idx + 1}</p>
+                            <p style={{textAlign: "center"}}>{expense.id}</p>
                             <p style={{marginLeft: "12px"}}>{expense.description}</p>
-                            <p style={{textAlign: "right", marginRight: "10px"}}>Rp. {expense.amount}</p>
+                            <p style={{textAlign: "right", marginRight: "10px"}}>{showInRupiah(expense.amount)}</p>
                             <div className="action-btns">
                                 <button className="edit-btn" onClick={() => {
                                     setEditingId(expense.id)
@@ -64,7 +71,10 @@ const History = () => {
                                     setNewDate(new Date(expense.date))
                                     setNewCategory(expense.category)
                                 }}>✏️</button>
-                                <button className="delete-btn" onClick={() => deleteTask(expense.id)}>🗑</button>
+                                <button className="delete-btn" onClick={() => {
+                                    setShowDeleteBox(true)
+                                    setDeleteId(expense.id)
+                                }}>🗑</button>
                                 <button className="detail-btn" onClick={() => {
                                     setDetailId(expense.id)
                                 }}>...</button>
@@ -112,6 +122,15 @@ const History = () => {
                                     </select>
                                     <button className="update-btn" type="submit">Update</button>
                                 </form>
+                            </div>
+                        )}
+                        {deleteId===expense.id && (
+                            <div className="delete-box" style={{display: showDeleteBox ? 'block' : 'none'}}>
+                                <p>Are you sure you want to delete this expense {expense.description}?</p>
+                                <div className="delete-box-btns">
+                                    <button className="yesno" onClick={() => deleteTask(expense.id)}>Yes</button>
+                                    <button className="yesno" onClick={() => setShowDeleteBox(false)}>No</button>
+                                </div>
                             </div>
                         )}
                     </div>

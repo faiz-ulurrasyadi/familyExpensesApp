@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import { supabase } from './supabase-client'
+import CurrencyInput from 'react-currency-input-field'
 
 const AddExpenses = () => {
-    const [expenses, setExpenses] = useState({description: '', amount: "", date: new Date(), category: 'Daily Needs'})
+    const [expenses, setExpenses] = useState({description: '', amount: 0, date: new Date(), category: 'Daily Needs'})
     const [showModal, setShowModal] = useState(false)
     const [modalMessage, setModalMessage] = useState('')
+    const category = ['Daily Needs', 'Food', 'Transport', 'Bills', 'Health', 'Education', 'Entertainment', 'Others']
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -27,11 +29,9 @@ const AddExpenses = () => {
             setShowModal(false)
         }, 1000)
 
-        setExpenses({description: '', amount: "", date: new Date(), category: 'Daily Needs'})
+        setExpenses({description: '', amount: 0, date: new Date(), category: 'Daily Needs'})
     }
 
-    const category = ['Daily Needs', 'Food', 'Transport', 'Bills', 'Health', 'Education', 'Entertainment', 'Others']
-    
     return (
         <form className="expense-form" onSubmit={handleSubmit}>
             <div className="modal-container" style={{display: showModal ? 'flex' : 'none'}}>
@@ -52,15 +52,14 @@ const AddExpenses = () => {
                 ))}
             />
             <label htmlFor="amount">Amount:</label>
-            <input 
-                type="number" 
-                id="amount" 
-                name="amount" 
-                required
-                placeholder='20.000' 
-                value={expenses.amount} 
-                onChange={(e) => setExpenses(prev => (
-                    {...prev, amount: parseInt(e.target.value) || 0}
+            <CurrencyInput
+                id="amount"
+                prefix="Rp "
+                decimalsLimit={0}
+                groupSeparator="."
+                decimalSeparator=","
+                onValueChange={(e) => setExpenses(prev => (
+                    {...prev, amount: e}
                 ))}
             />
             <label htmlFor="date">Date:</label>
@@ -88,7 +87,9 @@ const AddExpenses = () => {
                     </option>
                 ))}
             </select>
-            <button type="submit">Add Expense</button>
+            <button type="submit" className="add-expense-btn">
+                Add Expense
+            </button>
         </form>
     )
 }
